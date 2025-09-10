@@ -42,6 +42,15 @@ namespace csi281 {
   // Suggest using the facilities in STL <random>
   int *randomIntArray(const int length, const int min, const int max) {
     // YOUR CODE HERE
+    // random device
+    std::random_device rd;
+
+    std::mt19937 generator(rd());
+    std::uniform_int_distribution<int> distribution (1,100);
+    //int r = distribution(generator); //use distribution to transform the random number
+    //int r2 = distribution(rd); //use the random distribution to get a random element in distribution range (costly use for seeding)
+
+
   }
 
   // Finds the speed of linear versus binary search

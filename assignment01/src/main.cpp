@@ -186,11 +186,12 @@ static void drawAvgTempChart(CityTemperatureData &city1, CityTemperatureData &ci
 // Test all code and draw charts.
 int main(int argc, char *argv[]) {
   // run tests
-  // int result = Catch::Session().run( argc, argv );
+  //int result = Catch::Session().run( argc, argv );
 
   // draw graphs
   CityTemperatureData* nyc = readCity("NYC", "tempdata.csv", 1, 51);
   CityTemperatureData* burlington = readCity("Burlington", "tempdata.csv", 52, 102);
+
   drawAvgTempChart(*nyc, *burlington);
   drawExtremeDaysChart(*nyc, *burlington);
   delete nyc;

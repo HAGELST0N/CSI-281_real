@@ -44,21 +44,41 @@ namespace csi281 {
   // Find the right CityYear in the array and return it
   const CityYear CityTemperatureData::operator[](const int year) const {
     // YOUR CODE HERE
+    for (int i=0; i < count();i++) {
+      if (_data[i].year == year) {
+        return _data[i];
+      }
+    }
+    std::cout << "Unable to find data for input year." << endl;
   }
 
   // Get the average (mean) temperature of all time for this city
   // by averaging every CityYear.
   float CityTemperatureData::getAllTimeAverage() const {
-    // YOUR CODE HERE
+    float total = 0;
+    for (int i=0; i<_count; i++) {
+      total += _data[i].averageTemperature;
+    }
+    return total/_count;
   }
 
   // Sum all of the days below 32 for all years.
   int CityTemperatureData::getTotalDaysBelow32() const {
     // YOUR CODE HERE
+    int days_below_32 = 0;
+    for (int i=0; i < count(); i++) {
+      days_below_32 +=_data[i].numDaysBelow32;
+    }
+    return days_below_32;
   }
 
   // Sum all of the days above 90 for all years.
   int CityTemperatureData::getTotalDaysAbove90() const {
     // YOUR CODE HERE
+    int days_above_90 = 0;
+    for (int i=0; i < count(); i++) {
+      days_above_90 +=_data[i].numDaysAbove90;
+    }
+    return days_above_90;
   }
 }  // namespace csi281

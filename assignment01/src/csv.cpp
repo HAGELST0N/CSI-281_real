@@ -30,6 +30,7 @@
 #include <algorithm>  // for remove_if()
 #include <iostream>
 #include <sstream>
+#include <utility>
 
 using namespace std;
 
@@ -43,7 +44,7 @@ namespace csi281 {
         remove_if(str.begin(), str.end(), [&](char &c) { return !unwanted.find_first_of(c); }));
   }
 
-  // Read from a input string stream we hit the next comma, or the end
+  // Read from an input string stream we hit the next comma, or the end
   // and try to convert it into the float we seek.
   float readFloatCell(istringstream &iss) {
     string holder;
@@ -75,6 +76,19 @@ namespace csi281 {
   // You'll also want to construct a CityYear from what you have read from the file
   CityYear readLine(ifstream &file) {
     // YOUR CODE HERE
+    string line;
+    getline(file, line);
+    istringstream lineStream(line);
+    string trashCell, nameCell;
+    for (int i=0; i<2;i++)
+      readStringCell(lineStream);
+    int year = readIntCell(lineStream);
+    int numDaysBelow32 = readIntCell(lineStream);
+    int numDaysAbove90 = readIntCell(lineStream);
+    float averageTemperature = readFloatCell(lineStream);
+    float averageMax = readFloatCell(lineStream);
+    float averageMin = readFloatCell(lineStream);
+    return CityYear(year, numDaysBelow32, numDaysAbove90, averageTemperature, averageMax, averageMin);
   }
 
   // Read city by looking at the specified lines in the CSV
@@ -87,5 +101,20 @@ namespace csi281 {
   // create an array of CityYear instances to pass to the CityTemperatureData constructor
   // when the CityTemperatureData is created, it will take ownership of the array
   CityTemperatureData* readCity(string cityName, string fileName, int startLine, int endLine) {
+    ifstream csv;
+    string line;
+    int const totalLines = endLine-startLine+1;
+    CityYear* cityData= new CityYear [totalLines];
+    csv.open(fileName, ifstream::in);
+    getline(csv, line);
+
+    for (int i=1; i < startLine; i++)
+      getline(csv, line);
+    for (int i = 0; i < totalLines; i++)
+      cityData[i] = readLine(csv);
+    std::cout << "City Read" << std::endl;
+    csv.close();
+    return new CityTemperatureData(cityName, cityData, totalLines);
+
   }
 }  // namespace csi281
