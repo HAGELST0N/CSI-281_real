@@ -1,0 +1,7 @@
+Patrcik Hagelston
+
+1.Populating the array has a time complexity of O(n), but the sorting algorithm is O(nlogn).
+the exact time complexity is O(n+nlogn), but the tight bound is O(nlogn)
+because as n approaches infinity n is infinitely small compared to nlogn
+
+2.

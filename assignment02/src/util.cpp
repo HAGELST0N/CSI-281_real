@@ -42,15 +42,20 @@ namespace csi281 {
   // Suggest using the facilities in STL <random>
   int *randomIntArray(const int length, const int min, const int max) {
     // YOUR CODE HERE
+    int* array = new int [length];
     // random device
     std::random_device rd;
 
     std::mt19937 generator(rd());
-    std::uniform_int_distribution<int> distribution (1,100);
+    std::uniform_int_distribution<int> distribution (min,max);
     //int r = distribution(generator); //use distribution to transform the random number
-    //int r2 = distribution(rd); //use the random distribution to get a random element in distribution range (costly use for seeding)
-
-
+    int r2 = distribution(rd); //use the random distribution to get a random element in distribution range (costly use for seeding)
+    for( int i = 0; i<length; i++){
+      array[i] = r2;
+      r2=distribution(rd);
+    }
+    sort(array, array+length);
+    return array;
   }
 
   // Finds the speed of linear versus binary search
@@ -63,7 +68,6 @@ namespace csi281 {
   //
   // Suggest using the facilities in STL <chrono>
   // For example, you can start a timer using
-  // using namespace std::chrono;
   // auto start = duration_cast< nanoseconds >(system_clock::now().time_since_epoch()).count();
   // and stop a timer using
   // auto end = duration_cast< nanoseconds >(system_clock::now().time_since_epoch()).count();
@@ -78,7 +82,15 @@ namespace csi281 {
     // Put the result in a variable linearSearchSpeed
 
     // YOUR CODE HERE
+    auto start = duration_cast< nanoseconds >(system_clock::now().time_since_epoch()).count();
 
+
+    for(int i=0; i < numTests; i++){
+      for (int j=0; j < length; j++) {
+
+      }
+    }
+    auto end = duration_cast< nanoseconds >(system_clock::now().time_since_epoch()).count();
     // Do numTests binary searches and find the average time
     // Put the result in a variable binarySearchSpeed
 
