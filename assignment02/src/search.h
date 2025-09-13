@@ -25,7 +25,8 @@
 //  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 //  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 //  OTHER DEALINGS IN THE SOFTWARE.
-
+//
+// modified with permission by Patrick Hagelston
 #ifndef search_hpp
 #define search_hpp
 
@@ -37,12 +38,31 @@ namespace csi281 {
   // or -1 if the key is never found
   template <typename T> int linearSearch(T array[], const int length, const T key) {
     // YOUR CODE HERE
+    for (int guess = 0; guess < length; guess++){
+      if (key == array[guess])
+        return guess;
+    }
+    return -1;
   }
 
   // Returns the first location of the found key
   // or -1 if the key is never found; assumes a sorted array
   template <typename T> int binarySearch(T array[], const int length, const T key) {
     // YOUR CODE HERE
+    const int max_guess = std::ceil(log2(length));
+    int guess = length / 2;
+    for (int guess_count = 0; guess_count-1 < max_guess; guess_count++) {
+      int guess_iter = std::max(static_cast<int>(round(length / std::pow(2, guess_count + 2))),1);
+      if (array[guess] == key) {
+        return guess;
+        break;
+      }
+      if (array[guess] < key)
+        guess = guess+guess_iter;
+      else
+        guess = guess-guess_iter;
+    }
+    return -1;
   }
 }  // namespace csi281
 

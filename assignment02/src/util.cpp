@@ -24,12 +24,16 @@
 //  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 //  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 //  OTHER DEALINGS IN THE SOFTWARE.
+//
+// modified with permission by Patrick Hagelston
 
 #include "util.h"
 
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <random>
+#include <ranges>
 
 #include "search.h"
 
@@ -54,7 +58,6 @@ namespace csi281 {
       array[i] = r2;
       r2=distribution(rd);
     }
-    sort(array, array+length);
     return array;
   }
 
@@ -73,32 +76,41 @@ namespace csi281 {
   // auto end = duration_cast< nanoseconds >(system_clock::now().time_since_epoch()).count();
   // start, end will be results in nanoseconds
   pair<nanoseconds, nanoseconds> arraySearchSpeed(const int length, const int numTests) {
-    int *testArray = randomIntArray(length, 0, length);
-    int *testKeys = randomIntArray(numTests, 0, length);
+    int *testArray =  randomIntArray(length, 0, length);
+    int *testKeys =  randomIntArray(numTests, 0, length);
 
-    using namespace std::chrono;
+
 
     // Do numTests linear searches and find the average time
     // Put the result in a variable linearSearchSpeed
 
     // YOUR CODE HERE
-    auto start = duration_cast< nanoseconds >(system_clock::now().time_since_epoch()).count();
+    using namespace std::chrono;
 
-
+    long long lin_start = duration_cast< nanoseconds >(system_clock::now().time_since_epoch()).count();
     for(int i=0; i < numTests; i++){
-      for (int j=0; j < length; j++) {
-
-      }
+      linearSearch(testArray, length, testKeys[i]);
     }
-    auto end = duration_cast< nanoseconds >(system_clock::now().time_since_epoch()).count();
+    long long lin_end = duration_cast< nanoseconds >(system_clock::now().time_since_epoch()).count();
+
+    long long linearSearchSpeed = (lin_end-lin_start) / numTests;
     // Do numTests binary searches and find the average time
     // Put the result in a variable binarySearchSpeed
 
     // YOUR CODE HERE
+    std::sort(testArray, testArray+length);
+    auto bin_start = duration_cast< nanoseconds >(system_clock::now().time_since_epoch()).count();
+
+    for (int i = 0; i < numTests; i++) {
+      int answer = binarySearch(testArray, length, testKeys[i]);
+      }
+
+    auto bin_end = duration_cast< nanoseconds >(system_clock::now().time_since_epoch()).count();
+    auto binarySearchSpeed = (bin_end-bin_start)/numTests;
 
     delete testArray;
     delete testKeys;
-
+    std::cout << linearSearchSpeed << binarySearchSpeed << std::endl;
     return pair<nanoseconds, nanoseconds>(linearSearchSpeed, binarySearchSpeed);
   }
 }  // namespace csi281

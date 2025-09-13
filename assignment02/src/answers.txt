@@ -1,7 +1,20 @@
 Patrcik Hagelston
 
-1.Populating the array has a time complexity of O(n), but the sorting algorithm is O(nlogn).
-the exact time complexity is O(n+nlogn), but the tight bound is O(nlogn)
-because as n approaches infinity n is infinitely small compared to nlogn
+1.Populating the array has a time complexity of O(n) because it creates array elements one at a time.
 
-2.
+2. arraySearchSpeed() creates 2 arrays with a time complexity of O(n). One array is sorted using introsort with a
+maximum O(nlogn) runtime. linearSearch() has a time complexity of O(n) and binarySearch() has a runtime of O(logn).
+the exact time complexity is O(3n+nlogn+logn) and a tight complexity of O(nlogn).
+
+3. The equation is as follows with binary search and linear search on the left and right respectively.
+12nlogn+x*10*logn = x*5*n
+n is the size of array and x is the number of searches.
+
+in this case n=10000 so we can solve for x
+12(10000)log(10000)+x(10*log10000) = x*5*10000
+
+solving graphically, each side of the equation creates an intercept point at ~9.607 searches(x) with ~480384 instructions(y).
+this means that at 10 searches and above it becomes more efficient to sort and use binarysearch.
+
+4. Instead of a pair the function could use a list(array), tuple(class),
+or create a custom structure to store and return the results
