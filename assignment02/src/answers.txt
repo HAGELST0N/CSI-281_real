@@ -17,4 +17,6 @@ solving graphically, each side of the equation creates an intercept point at ~9.
 this means that at 10 searches and above it becomes more efficient to sort and use binarysearch.
 
 4. Instead of a pair the function could use a list(array), tuple(class),
-or create a custom structure to store and return the results
+or create a custom structure to store and return the results (pair is a structure, but a custom structure
+could more clearly define where the results are stored e.g. searchSpeed.binary and searchSpeed.linear not
+pair.first and pair.second
