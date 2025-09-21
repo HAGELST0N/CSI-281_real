@@ -40,18 +40,62 @@ namespace csi281 {
   // using the bubble sort algorithm
   template <typename T> void bubbleSort(T array[], const int length) {
     // YOUR CODE HERE
+    for (int i=length; i>0;i--) {
+
+      for (int j=0;j<i-1;j++) {
+        T first = array[j];
+        T second = array[j+1];
+        if (first > second) {
+          array[j] = second;
+          array[j+1] = first;
+        }
+      }
+    }
   }
 
   // Performs an in-place ascending sort of *array* of size *length*
   // using the selection sort algorithm
   template <typename T> void selectionSort(T array[], const int length) {
     // YOUR CODE HERE
+    for (int i = 0; i<length; i++) {
+      T least = array[i];
+      int leastPos = i;
+      for (int j=i; j<length;j++) {
+        if (array[j]<least) {
+          leastPos = j;
+          least = array[j];
+        }
+      }
+      if (leastPos != i) {
+        T temp = array[i];
+        array[i] = array[leastPos];
+        array[leastPos] = temp;
+      }
+    }
+
+
   }
 
   // Performs an in-place ascending sort of *array* of size *length*
   // using the insertion sort algorithm
   template <typename T> void insertionSort(T array[], const int length) {
     // YOUR CODE HERE
+    for (int i=1; i<length; i++) {
+      int j;
+      T toInsert = array[i];
+      for(j = i-1; j>=0;j--){
+        if(array[j]<toInsert){
+          break;
+        }
+      }
+      j++;
+      int insertPos=j;
+      T first = array[j];
+      for(int k = i;k>insertPos;k--){
+        array[k] = array[k-1];
+      }
+      array[insertPos] = toInsert;
+    }
   }
 }  // namespace csi281
 
