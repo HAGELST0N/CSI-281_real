@@ -1,0 +1,10 @@
+Patrick Hagelston
+1. Bubble sort makes more swaps than selection and insertion sort
+
+2. Optimized insertion sort algorithms make less comparisons than selection sort which always uses the worst case scenario
+
+3. A class would need to store an element that can be sorted. for example a class has element int randomNum and
+an array of object.randomNum can be sorted
+
+4. std::sort is faster because it uses a hybrid sort algorithm which uses multiple algorithms where they are
+most efficient. This helps to avoid the worst case runtimes of the more efficient algorithms
