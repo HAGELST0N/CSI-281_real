@@ -50,13 +50,11 @@ namespace csi281 {
   template <typename T> void mergeSort(T array[], const int start, const int end) {
     // YOUR CODE HERE
     int mid = ((end-start) / 2)+start;
-    int firstLen = mid-start;
-    int secondLen = end-(mid+1);
-    if (firstLen != 1)
+    if (end-start > 1) {
       mergeSort(array, start, mid);
-    if (secondLen !=1)
-      mergeSort(array, mid+1,end);
-    std::inplace_merge(array + start, array+mid, array+end);
+      mergeSort(array, mid,end);
+      std::inplace_merge(array + start, array+mid, array+end);
+    }
   }
 
   // setup random number generator
