@@ -49,11 +49,11 @@ namespace csi281 {
   // http://www.cplusplus.com/reference/algorithm/inplace_merge/
   template <typename T> void mergeSort(T array[], const int start, const int end) {
     // YOUR CODE HERE
-    int mid = ((end-start) / 2)+start;
-    if (end-start > 1) {
+    if (end-start > 0) {
+      int mid = ((end+start) / 2);
       mergeSort(array, start, mid);
-      mergeSort(array, mid,end);
-      std::inplace_merge(array + start, array+mid, array+end);
+      mergeSort(array, mid+1,end);
+      std::inplace_merge(array + start, array + mid+1, array + end+1);
     }
   }
 
@@ -76,17 +76,18 @@ namespace csi281 {
   // the appropriate place
   template <typename T> void quickSort(T array[], const int start, const int end) {
     // YOUR CODE HERE
-    int pivotIndex = start;
-    int storeIndex = pivotIndex+1;
-    for (int i = storeIndex; storeIndex < end; storeIndex++) {
-      if (array[storeIndex] <= array[pivotIndex]) {
-        T temp = array[storeIndex];
-        array[storeIndex] = array[i];
-        array[i] = temp;
+
+    uniform_int_distribution<int> distribution(start, end);
+    int pivotIndex = distribution(rd);
+    int storeIndex = start+1;
+    swap(array[pivotIndex], array[end]);
+    for (int i = start; i < end; i++) {
+      if (array[i] < array[end]) {
+        swap(array[i], array[storeIndex]);
         storeIndex++;
       }
     }
-
+    swap(array[storeIndex], array[end]);
   }
 
   // Performs an in-place ascending sort of *array*
