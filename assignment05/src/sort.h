@@ -76,29 +76,28 @@ namespace csi281 {
   // the appropriate place
   template <typename T> void quickSort(T array[], const int start, const int end) {
     // YOUR CODE HERE
-
-    uniform_int_distribution<int> distribution(start, end);
     // detect base case and sort
-    if (start-end == 1) {
-      if (array[start] <= array[end])
-        return;
-      swap(array[start], array[end]);
-      return;
-      }
-
-    int pivotIndex = distribution(rd);
+    //if (start-end == 1) {
+    //  if (array[start] <= array[end])
+    //    return;
+    //  swap(array[start], array[end]);
+    //  return;
+    //}
+    uniform_int_distribution<int> distribution(start, end);
+    swap(array[distribution(rd)], array[end]);
+    T pivotValue = array[end];
     int storeIndex = end-1;
-    swap(array[pivotIndex], array[end]);
-    for (int i = end-1; i >= start; i--) {
-      if (array[i] > array[end]) {
+
+    for (int i = storeIndex; i >= start; i--) {
+      if (array[i] > pivotValue) {
         swap(array[i], array[storeIndex]);
         storeIndex--;
       }
     }
     swap(array[storeIndex+1], array[end]);
-    if (end-storeIndex-1>0)
+    if (storeIndex+1<end)
       quickSort(array, storeIndex+1, end);
-    if (storeIndex-start>0)
+    if (start<storeIndex)
       quickSort(array, start, storeIndex);
   }
 
