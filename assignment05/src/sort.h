@@ -78,16 +78,28 @@ namespace csi281 {
     // YOUR CODE HERE
 
     uniform_int_distribution<int> distribution(start, end);
+    // detect base case and sort
+    if (start-end == 1) {
+      if (array[start] <= array[end])
+        return;
+      swap(array[start], array[end]);
+      return;
+      }
+
     int pivotIndex = distribution(rd);
-    int storeIndex = start+1;
+    int storeIndex = end-1;
     swap(array[pivotIndex], array[end]);
-    for (int i = start; i < end; i++) {
-      if (array[i] < array[end]) {
+    for (int i = end-1; i >= start; i--) {
+      if (array[i] > array[end]) {
         swap(array[i], array[storeIndex]);
-        storeIndex++;
+        storeIndex--;
       }
     }
-    swap(array[storeIndex], array[end]);
+    swap(array[storeIndex+1], array[end]);
+    if (end-storeIndex-1>0)
+      quickSort(array, storeIndex+1, end);
+    if (storeIndex-start>0)
+      quickSort(array, start, storeIndex);
   }
 
   // Performs an in-place ascending sort of *array*
@@ -104,6 +116,28 @@ namespace csi281 {
   // sort part of the array as per the parameters of this version
   template <typename T> void insertionSort(T array[], const int start, const int end) {
     // YOUR CODE HERE
+    if (end-start==1){
+      if (start<=end)
+        return;
+      swap(array[start], array[end]);
+      return;
+    }
+    for (int i=start+1; i<end+1; i++) {
+      int j;
+      T toInsert = array[i];
+      for(j = i-1; j>=start;j--){
+        if(array[j]<toInsert){
+          break;
+        }
+      }
+      j++;
+      int insertPos=j;
+      T first = array[j];
+      for(int k = i;k>insertPos;k--){
+        array[k] = array[k-1];
+      }
+      array[insertPos] = toInsert;
+    }
   }
 
   // Performs an in-place ascending sort of *array*
@@ -116,6 +150,15 @@ namespace csi281 {
   // should be able to call the insertionSort above
   template <typename T> void hybridSort(T array[], const int start, const int end) {
     // YOUR CODE HERE
+    if (end-start > 9) {
+      int mid = ((end+start) / 2);
+      hybridSort(array, start, mid);
+      hybridSort(array, mid+1,end);
+      std::inplace_merge(array + start, array + mid+1, array + end+1);
+    }
+    else {
+      insertionSort(array, start, end);
+    }
   }
 
 }  // namespace csi281
