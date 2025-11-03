@@ -139,6 +139,15 @@ namespace csi281 {
       // from class, from your book, and you are free to
       // use other pseudocode as long as you cite it. Please
       // do not look at other C++ solutions.
+      while (!frontier.empty()) {
+        auto [weight, current_loc] = frontier.top;
+        frontier.pop();
+        V* current = &adjacencyList[current_loc];
+        list<pair<V,W>> neighbors = neighborsWithWeights(current);
+        for (int i = 0; i < neighbors.size(); i++) {
+          neighbors[i]
+        }
+      }
 
       return make_pair(parents, weights);
     }

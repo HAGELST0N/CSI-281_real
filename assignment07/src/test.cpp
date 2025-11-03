@@ -47,6 +47,8 @@ TEST_CASE("Queue Tests", "[queue]") {
     // work properly in concert with getCount()
     // and remove()
     // YOUR CODE HERE
+    q1.push(1);
+    REQUIRE((q1.peek) == 1);
   }
 
   SECTION("Queue w/ string tests") {

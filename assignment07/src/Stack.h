@@ -37,6 +37,19 @@ namespace csi281 {
   template <typename T> class Stack : public SequentialCollection<T> {
   public:
     // YOUR CODE HERE
+  void push(const T &item){
+    backingStore.push_back(item);
+  }
+  T pop(){
+    
+    T temp = peek();
+    backingStore.pop_back();
+    return temp;
+  }
+  T peek(){
+    return backingStore[this -> getCount()-1];
+  }
+
   protected:
     using SequentialCollection<T>::backingStore;
   };
