@@ -28,8 +28,22 @@
 //  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 //  OTHER DEALINGS IN THE SOFTWARE.
 
-using namespace std;
+#include <iostream>
+#include <list>
+#include <string>
 
+#include "WeightedGraph.h"
+
+using namespace std;
+using namespace csi281;
 int main(int argc, char* argv[]) {
   // run your small scoped tests here
+  WeightedGraph<string, int> cityGraph1 = WeightedGraph<string, int>();
+  cityGraph1.addEdge("Seattle", "Chicago", 2097);
+  cityGraph1.addEdge("Seattle", "Denver", 1331);
+  cityGraph1.addEdge("Seattle", "San Francisco", 807);
+  cityGraph1.addEdge("San Francisco", "Denver", 1267);
+  cityGraph1.addEdge("San Francisco", "Los Angeles", 381);
+
+  cityGraph1.dijkstra("Seattle");
 }

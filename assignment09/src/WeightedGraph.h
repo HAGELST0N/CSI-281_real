@@ -140,13 +140,13 @@ namespace csi281 {
       // use other pseudocode as long as you cite it. Please
       // do not look at other C++ solutions.
       while (!frontier.empty()) {
-        auto [weight, current_loc] = frontier.top;
+        auto current = frontier.top();
         frontier.pop();
-        V* current = &adjacencyList[current_loc];
-        list<pair<V,W>> neighbors = neighborsWithWeights(current);
-        for (int i = 0; i < neighbors.size(); i++) {
-          neighbors[i]
-        }
+        V* current_loc = &adjacencyList[current];
+        //list<pair<V,W>> neighbors = neighborsWithWeights(current);
+        //for (int i = 0; i < neighbors.size(); i++) {
+        //cout << current_loc;
+        //}
       }
 
       return make_pair(parents, weights);
