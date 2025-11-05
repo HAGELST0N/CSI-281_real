@@ -37,6 +37,7 @@
 #include <unordered_set>
 #include <utility>
 #include <vector>
+#include <cassert>
 
 #include "MemoryLeakDetector.h"
 
@@ -140,13 +141,12 @@ namespace csi281 {
       // use other pseudocode as long as you cite it. Please
       // do not look at other C++ solutions.
       while (!frontier.empty()) {
-        auto current = frontier.top();
+        auto [weight, current] = frontier.top();
         frontier.pop();
-        V* current_loc = &adjacencyList[current];
-        //list<pair<V,W>> neighbors = neighborsWithWeights(current);
-        //for (int i = 0; i < neighbors.size(); i++) {
-        //cout << current_loc;
-        //}
+        auto neighbors = neighborsWithWeights(current);
+        for (auto &p : neighbors) {
+          frontier.push();
+        }
       }
 
       return make_pair(parents, weights);
