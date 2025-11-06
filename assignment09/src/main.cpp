@@ -38,12 +38,22 @@ using namespace std;
 using namespace csi281;
 int main(int argc, char* argv[]) {
   // run your small scoped tests here
-  WeightedGraph<string, int> cityGraph1 = WeightedGraph<string, int>();
-  cityGraph1.addEdge("Seattle", "Chicago", 2097);
-  cityGraph1.addEdge("Seattle", "Denver", 1331);
-  cityGraph1.addEdge("Seattle", "San Francisco", 807);
-  cityGraph1.addEdge("San Francisco", "Denver", 1267);
-  cityGraph1.addEdge("San Francisco", "Los Angeles", 381);
+  WeightedGraph<string, int> champlainGraph = WeightedGraph<string, int>();
+  champlainGraph.addEdge("IDX", "Whiting", 34);
+  champlainGraph.addEdge("IDX", "Sanders", 999);
+  champlainGraph.addEdge("Whiting", "Sanders", 950);
+  champlainGraph.addEdge("Joyce", "IDX", 6);
+  champlainGraph.addEdge("Joyce", "Whiting", 30);
 
-  cityGraph1.dijkstra("Seattle");
+  auto resultPair = champlainGraph.dijkstra("Joyce");
+  auto parentResults = resultPair.first;
+  auto weightResults = resultPair.second;
+
+  cout << weightResults["Joyce"];
+  cout << weightResults["Whiting"];
+  cout << weightResults["Sanders"];
+  cout << weightResults["IDX"];
+  auto path = champlainGraph.pathMapToPath(parentResults, "Sanders");
+  cout << "------champlainGraph path------" << endl;
+  printPath(path);
 }

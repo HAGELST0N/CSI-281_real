@@ -143,12 +143,17 @@ namespace csi281 {
       while (!frontier.empty()) {
         auto [weight, current] = frontier.top();
         frontier.pop();
+
         auto neighbors = neighborsWithWeights(current);
-        for (auto &p : neighbors) {
-          frontier.push();
+        for (auto [neighbor, neighbor_weight ]: neighbors) {
+          W new_weight = weights[current]+neighbor_weight;
+          if(!weights.contains(neighbor) || weights[neighbor] > new_weight){
+            weights[neighbor] = new_weight;
+            frontier.push(make_pair(new_weight, neighbor));
+            parents[neighbor] = current;
+          }
         }
       }
-
       return make_pair(parents, weights);
     }
 

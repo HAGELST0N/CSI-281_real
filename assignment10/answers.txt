@@ -1,0 +1,12 @@
+1.
+
+2. MST creates a path to connect nodes and allows branches, the traveling salesman does not travel to a
+node it has already traversed.
+
+3.
+
+4.
+
+5.
+
+6.

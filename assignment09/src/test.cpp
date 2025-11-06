@@ -179,3 +179,38 @@ TEST_CASE("dijkstra() cityGraph2 Test", "[dijksta]") {
 // reuse cityGraph or cityGraph2. Cite any sources.
 // Make sure that your assertions are fairly comprehensive.
 // Look at the prior two tests as examples.
+TEST_CASE("dijkstra() champlainGraph Test", "[dijksta]") {
+  WeightedGraph<string, int> champlainGraph = WeightedGraph<string, int>();
+  champlainGraph.addEdge("IDX", "Whiting", 34);
+  champlainGraph.addEdge("IDX", "Sanders", 999);
+  champlainGraph.addEdge("Whiting", "Sanders", 950);
+  champlainGraph.addEdge("Joyce", "IDX", 6);
+  champlainGraph.addEdge("Joyce", "Whiting", 30);
+
+  cout << "------champlainGraph------" << endl;
+  champlainGraph.debugPrint();
+  auto resultPair = champlainGraph.dijkstra("Joyce");
+  auto parentResults = resultPair.first;
+  auto weightResults = resultPair.second;
+  // are the distances from Joyce correct?
+  CHECK(weightResults["Joyce"] == 0);
+  CHECK(weightResults["Sanders"] == 980);
+  CHECK(weightResults["Whiting"] == 30);
+  CHECK(weightResults["IDX"] == 6);
+  auto path = champlainGraph.pathMapToPath(parentResults, "Sanders");
+  cout << "------champlainGraph path------" << endl;
+  printPath(path);
+  // Shortest path should be
+  // Joyce -> IDX -> Sanders
+  CHECK(path.size() == 3);
+  CHECK(path.front() == "Joyce");
+  CHECK(path.back() == "Sanders");
+  auto it = path.begin();
+  auto last = path.front();
+  for (unsigned long i = 1; i < path.size(); i++) {
+    it++;
+    auto current = *it;
+    CHECK(champlainGraph.edgeExists(last, current));
+    last = current;
+  }
+}
