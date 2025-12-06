@@ -37,23 +37,23 @@
 using namespace std;
 using namespace csi281;
 int main(int argc, char* argv[]) {
-  // run your small scoped tests here
-  WeightedGraph<string, int> champlainGraph = WeightedGraph<string, int>();
-  champlainGraph.addEdge("IDX", "Whiting", 34);
-  champlainGraph.addEdge("IDX", "Sanders", 999);
-  champlainGraph.addEdge("Whiting", "Sanders", 950);
-  champlainGraph.addEdge("Joyce", "IDX", 6);
-  champlainGraph.addEdge("Joyce", "Whiting", 30);
-
-  auto resultPair = champlainGraph.dijkstra("Joyce");
-  auto parentResults = resultPair.first;
-  auto weightResults = resultPair.second;
-
-  cout << weightResults["Joyce"];
-  cout << weightResults["Whiting"];
-  cout << weightResults["Sanders"];
-  cout << weightResults["IDX"];
-  auto path = champlainGraph.pathMapToPath(parentResults, "Sanders");
-  cout << "------champlainGraph path------" << endl;
-  printPath(path);
+  // // run your small scoped tests here
+  // WeightedGraph<string, int> champlainGraph = WeightedGraph<string, int>();
+  // champlainGraph.addEdge("IDX", "Whiting", 34);
+  // champlainGraph.addEdge("IDX", "Sanders", 999);
+  // champlainGraph.addEdge("Whiting", "Sanders", 950);
+  // champlainGraph.addEdge("Joyce", "IDX", 6);
+  // champlainGraph.addEdge("Joyce", "Whiting", 30);
+  //
+  // auto resultPair = champlainGraph.dijkstra("Joyce");
+  // auto parentResults = resultPair.first;
+  // auto weightResults = resultPair.second;
+  //
+  // cout << weightResults["Joyce"];
+  // cout << weightResults["Whiting"];
+  // cout << weightResults["Sanders"];
+  // cout << weightResults["IDX"];
+  // auto path = champlainGraph.pathMapToPath(parentResults, "Sanders");
+  // cout << "------champlainGraph path------" << endl;
+  // printPath(path);
 }

@@ -145,12 +145,12 @@ namespace csi281 {
         frontier.pop();
 
         auto neighbors = neighborsWithWeights(current);
-        for (auto [neighbor, neighbor_weight ]: neighbors) {
-          W new_weight = weights[current]+neighbor_weight;
-          if(!weights.contains(neighbor) || weights[neighbor] > new_weight){
-            weights[neighbor] = new_weight;
-            frontier.push(make_pair(new_weight, neighbor));
-            parents[neighbor] = current;
+        for (auto& neighbor : neighborsWithWeights(current)) {
+          W new_weight = weights[current]+neighbor.second;
+          if(!weights.contains(neighbor.first) || weights[neighbor.first] > new_weight){
+            weights[neighbor.first] = new_weight;
+            frontier.push(make_pair(new_weight, neighbor.first));
+            parents[neighbor.first] = current;
           }
         }
       }
