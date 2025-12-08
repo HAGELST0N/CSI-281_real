@@ -59,6 +59,7 @@ namespace csi281 {
     // NOTE: Our heap starts at 0, not 1
     T peek() {
       // YOUR CODE HERE
+      return heap[0];
     }
 
     // Remove the next element (max element) in the heap and return it
@@ -69,6 +70,13 @@ namespace csi281 {
     // after a pop.
     T pop() {
       // YOUR CODE HERE
+      if (heapSize < 1)
+        throw std::runtime_error("heap underflow");
+      T max = heap[0];
+      heap[0] = heap[heapSize-1];
+      heapSize -= 1;
+      maxHeapify(0);
+      return max;
     }
 
     // Put a new element into the priority queue
@@ -81,6 +89,14 @@ namespace csi281 {
     // the end of the vector heap
     void push(T key) {
       // YOUR CODE HERE
+      heap.resize(heap.size()+1);
+      heapSize++;
+      heap[heapSize-1] = key;
+      int i = heapSize - 1;
+      while (i > 0 && heap[parent(i)] < heap[i]) {
+        swap(heap[i], heap[parent(i)]);
+        i = parent(i);
+      }
     }
 
     // How many items are in the priority queue?
@@ -100,6 +116,19 @@ namespace csi281 {
     // NOTE: Macros left() and right() are defined at the top of this file
     void maxHeapify(int i) {
       // YOUR CODE HERE
+      int largest;
+      int l = left(i);
+      int r = right(i);
+      if (l <= heapSize && heap[l] > heap[i])
+         largest = l;
+      else
+         largest = i;
+      if (r <= heapSize && heap[r] > heap[largest])
+         largest = r;
+      if (largest!=i) {
+        swap(heap[i], heap[largest]);
+        maxHeapify(largest);
+      }
     }
 
     vector<T> heap;
