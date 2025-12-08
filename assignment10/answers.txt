@@ -1,12 +1,33 @@
-1.
+1. You can invert the comparison operator so that it returns the greater weight not the lower one.
 
-2. MST creates a path to connect nodes and allows branches, the traveling salesman does not travel to a
-node it has already traversed.
+2. MST connects the vertexes with the least weighted edges. Traveling salesman tries to travel to all of them.
+To use an analogy, it is the difference between creating a road to connect cities with the least concrete and traveling the least distance on the road to visit each city.
 
-3.
+3. Seattle, San Francisco, Los Angeles, Riverside, Phoenix
+          +-----+-----+-----+-----+-----+
+  Seattle | 0   | 678 | INF | INF | INF |
+          +-----+-----+-----+-----+-----+
+       SF | 678 | 0   | 348 | 386 | INF |
+          +-----+-----+-----+-----+-----+
+       LA | INF | 348 | 0   | 50  | 357 |
+          +-----+-----+-----+-----+-----+
+Riverside | INF | 386 | 50  | 0   | 307 |
+          +-----+-----+-----+-----+-----+
+  Phoenix | INF | INF | 357 | 307 | 0   |
+          +-----+-----+-----+-----+-----+
 
-4.
 
-5.
+4. https://www.geeksforgeeks.org/dsa/prims-minimum-spanning-tree-mst-greedy-algo-5/
+      With binary heap, O((E+V) log V)
+      Without binary heap, O(V^2)
 
-6.
+5. The algorithm is greedy because it always adds the lowest weight edge that expands the tree
+without considering previous or future decisions this is known as making locally optimal choices.
+
+6. Cooley-Tukey algorithm is a fast fourier transform algorithm that was originally invented by Carl Freidrich Gauss in 1805 to interpolate the trajectories of asteroids.
+It was only published posthumously in 1876 in a dying form of the latin language
+It was named after James Cooley and John Tukey who rediscovered it in 1965 and described its implementation on a computer.
+With computers the algorithm became easier to use and gained popularity
+Years after Tukey and Cooley published their paper it was discovered that Gauss had invented the algorithm 160 years ago.
+
+https://en.wikipedia.org/wiki/Cooley%E2%80%93Tukey_FFT_algorithm
